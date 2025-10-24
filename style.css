@@ -1,0 +1,79 @@
+ @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
+        .digital-font {
+            font-family: 'Redressed', cursive;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Subtle blue glow */
+        }
+
+        /* --- Image Sliding Background --- */
+        body {
+            background-size: cover; /* Cover the entire screen */
+            background-position: center center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            transition: background-image 2s ease-in-out; /* Smooth transition between images */
+            filter: brightness(0.7) ; /* Slightly darken and blur the background for readability */
+            animation: backgroundCycle 20s infinite; /* 20s for each full cycle (3 images * ~6.6s each) */
+        }
+
+        /* Keyframes for the background image cycling */
+        @keyframes backgroundCycle {
+            0%   { background-image: url("a.png"); } /* Image 1 */
+            5%  { background-image: url("a.png"); } /* Hold Image 1 */
+            
+            10%  { background-image: url("b.png"); } /* Transition to Image 2 */
+            15% { background-image: url("b.png"); } /* Hold Image 2 */
+            
+            20%  { background-image: url("c.png"); } /* Transition to Image 3 */
+            25%  { background-image: url("c.png"); } /* Hold Image 3 */
+
+            30%  { background-image: url("d.png"); } /* Transition to Image 4 */
+            35%  { background-image: url("d.png"); } /* Hold Image 4 */
+
+            40%  { background-image: url("e.png"); } /* Transition to Image 5 */
+            45%  { background-image: url("e.png"); } /* Hold Image 5 */
+
+            50%  { background-image: url("f.png"); } /* Transition to Image 6 */
+            55% { background-image: url("f.png"); } /* Hold Image 6 */
+
+            60%  { background-image: url("g.png"); } /* Transition to Image 7 */
+            65%  { background-image: url("g.png"); } /* Hold Image 7 */
+
+            70%  { background-image: url("h.png"); } /* Transition to Image 8 */
+            75% { background-image: url("h.png"); } /* Hold Image 8 */
+
+            80%  { background-image: url("i.png"); } /* Transition to Image 9 */
+            85%  { background-image: url("i.png"); } /* Hold Image 9 */
+
+            90%  { background-image: url("j.png"); } /* Transition to Image 10 */
+            95%  { background-image: url("j.png"); } /* Hold Image 10 */
+            100%  { background-image: url("a.png"); } /* Back to Image 1 for seamless loop */
+        }
+        /* --- End Image Sliding Background --- */
+
+        /* Animation for the colon to flash every second */
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .colon-blink {
+            animation: blink 1s infinite step-start;
+        }
+        .Name{
+       color: rgb(0, 0, 0);
+        backdrop-filter: blur(40cm);
+        background-color:rgba(red, green, blue, alpha);
+        width: 5cm;
+        border: 1px solid black;
+        height: 2cm;
+        font-size: 40px;
+        text-align: center;
+        position: relative;
+        top: -4cm;
+        }
+    .clockcontainer {
+     background-color: rgba(17, 24, 39, 0.7); /* Slightly more opaque background for the clock box */
+     backdrop-filter: blur(5px); /* Add a blur effect to the clock box background */
+     position: relative;
+     top: 3cm;
+     right: 10cm;
+}
