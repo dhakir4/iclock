@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <!-- Load Tailwind CSS --><script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom font for a sharp, modern digital look */
+        @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
+        .digital-font {
+            font-family: 'Redressed', cursive;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Subtle blue glow */
+        }
+
+        /* --- Image Sliding Background --- */
+        body {
+            background-size: cover; /* Cover the entire screen */
+            background-position: center center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            transition: background-image 2s ease-in-out; /* Smooth transition between images */
+            filter: brightness(0.7) ; /* Slightly darken and blur the background for readability */
+            animation: backgroundCycle 20s infinite; /* 20s for each full cycle (3 images * ~6.6s each) */
+        }
+
+        /* Keyframes for the background image cycling */
+        @keyframes backgroundCycle {
+            0%   { background-image: url("a.png"); } /* Image 1 */
+            5%  { background-image: url("a.png"); } /* Hold Image 1 */
+            
+            10%  { background-image: url("b.png"); } /* Transition to Image 2 */
+            15% { background-image: url("b.png"); } /* Hold Image 2 */
+            
+            20%  { background-image: url("c.png"); } /* Transition to Image 3 */
+            25%  { background-image: url("c.png"); } /* Hold Image 3 */
+
+            30%  { background-image: url("d.png"); } /* Transition to Image 4 */
+            35%  { background-image: url("d.png"); } /* Hold Image 4 */
+
+            40%  { background-image: url("e.png"); } /* Transition to Image 5 */
+            45%  { background-image: url("e.png"); } /* Hold Image 5 */
+
+            50%  { background-image: url("f.png"); } /* Transition to Image 6 */
+            55% { background-image: url("f.png"); } /* Hold Image 6 */
+
+            60%  { background-image: url("g.png"); } /* Transition to Image 7 */
+            65%  { background-image: url("g.png"); } /* Hold Image 7 */
+
+            70%  { background-image: url("h.png"); } /* Transition to Image 8 */
+            75% { background-image: url("h.png"); } /* Hold Image 8 */
+
+            80%  { background-image: url("i.png"); } /* Transition to Image 9 */
+            85%  { background-image: url("i.png"); } /* Hold Image 9 */
+
+            90%  { background-image: url("j.png"); } /* Transition to Image 10 */
+            95%  { background-image: url("j.png"); } /* Hold Image 10 */
+            100%  { background-image: url("a.png"); } /* Back to Image 1 for seamless loop */
+        }
+        /* --- End Image Sliding Background --- */
+
+        /* Animation for the colon to flash every second */
+        @keyframes blink {
+            0%, 49% { opacity: 1; }
+            50%, 100% { opacity: 0; }
+        }
+
+        .colon-blink {
+            animation: blink 1s infinite step-start;
+        }
+        .Name{
+       color: rgb(0, 0, 0);
+        backdrop-filter: blur(40cm);
+        background-color:rgba(red, green, blue, alpha);
+        width: 5cm;
+        border: 1px solid black;
+        height: 2cm;
+        font-size: 40px;
+        text-align: center;
+        position: relative;
+        top: -4cm;
+        }
+.clockcontainer {
+   background-color: rgba(17, 24, 39, 0.7); /* Slightly more opaque background for the clock box */
+    backdrop-filter: blur(5px); /* Add a blur effect to the clock box background */
+    position: relative;
+    top: 3cm;
+    right: 10cm;
+}
+        /* Ensure content is readable over the image */
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-blue': '#3b82f6',
+                        'dark-bg': '#111827',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="min-h-screen flex flex-col items-center justify-center text-white p-4">
+<div class="Name flex items-center justify-center rounded-lg shadow-lg p-4 mb-8">
+<h1>إتحاد</h1>
+</div>
+<div class="clockcontainer flex flex-col items-center p-8 border border-gray-700 rounded-xl shadow-2xl">
+        <!-- Time Display (HH:MM:SS AM/PM) --><div id="time-display" class="digital-font text-1xl md:text-7xl font-bold mb-4 tracking-wider text-primary-blue transition-colors duration-300">
+            --:--:--
+        </div>
+
+        <!-- Date Display (Weekday, Month Day, Year) --><div id="date-display" class="text-grey-400 text-xl font-dark-bg transition-colors duration-300">
+            ---, --- --, ----
+        </div>
+    </div>
+            
+
+    <script>
+        const timeDisplay = document.getElementById('time-display');
+        const dateDisplay = document.getElementById('date-display');
+        
+        /**
+         * Pads a number with a leading zero if it's less than 10.
+         */
+        const pad = (num) => num.toString().padStart(2, '0');
+
+        /**
+         * The main function to update the clock every second.
+         */
+        const updateClock = () => {
+            const now = new Date();
+            let hours = now.getHours();
+            const minutes = now.getMinutes();
+            const seconds = now.getSeconds();
+
+            // 1. Update Date Display
+            const dateOptions = {
+                weekday: 'long', // Full weekday name
+                month: 'short',
+                day: 'numeric',
+                year: 'numeric'
+            };
+            dateDisplay.textContent = now.toLocaleDateString('en-US', dateOptions);
+
+
+            // 2. Format Time String (12-Hour only)
+            const ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // The hour '0' should be '12'
+
+            // Build the time string with blinking colons and AM/PM indicator
+            const timeString = `${pad(hours)}<span class="colon-blink">:</span>${pad(minutes)}<span class="colon-blink">:</span>${pad(seconds)} <span class="text-3xl font-normal">${ampm}</span>`;
+
+            timeDisplay.innerHTML = timeString;
+            
+            // Re-apply blink class 
+            document.querySelectorAll('.colon-blink').forEach(el => {
+                el.style.animationName = 'blink';
+            });
+        };
+
+        window.onload = function() {
+            // Initial call
+            updateClock();
+            // Update the clock every second
+            setInterval(updateClock, 1000);
+        };
+
+    </script>
+</body>
+</html>
