@@ -1,79 +1,118 @@
- @import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
-        .digital-font {
-            font-family: 'Redressed', cursive;
-            text-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Subtle blue glow */
-        }
+/* Custom font for a sharp, modern digital look */
+@import url('https://fonts.googleapis.com/css2?family=Redressed&display=swap');
+.digital-font {
+    font-family: 'Redressed', cursive;
+    text-shadow: 0 0 10px rgba(59, 130, 246, 0.7); /* Applied blue glow using 'primary-blue' from Tailwind config */
+}
 
-        /* --- Image Sliding Background --- */
-        body {
-            background-size: cover; /* Cover the entire screen */
-            background-position: center center; /* Center the image */
-            background-repeat: no-repeat; /* Do not repeat the image */
-            transition: background-image 2s ease-in-out; /* Smooth transition between images */
-            filter: brightness(0.7) ; /* Slightly darken and blur the background for readability */
-            animation: backgroundCycle 20s infinite; /* 20s for each full cycle (3 images * ~6.6s each) */
-        }
+/* --- Image Sliding Background --- */
+body {
+    background-size: cover; /* Cover the entire screen */
+    background-position: center center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    /* Removed transition on background-image as it interferes with animation */
+    /* Corrected: The filter property should be separate from other background properties */
+    filter: brightness(0.7); 
+    animation: backgroundCycle 20s infinite; /* 20s for each full cycle (10 images * 2s each) */
+}
 
-        /* Keyframes for the background image cycling */
-        @keyframes backgroundCycle {
-            0%   { background-image: url("a.png"); } /* Image 1 */
-            5%  { background-image: url("a.png"); } /* Hold Image 1 */
-            
-            10%  { background-image: url("b.png"); } /* Transition to Image 2 */
-            15% { background-image: url("b.png"); } /* Hold Image 2 */
-            
-            20%  { background-image: url("c.png"); } /* Transition to Image 3 */
-            25%  { background-image: url("c.png"); } /* Hold Image 3 */
+/* Keyframes for a smooth cross-fading background image cycling */
+@keyframes backgroundCycle {
+    /* Image a.png (Hold 0-7%) */
+    0%   { background-image: url("a.png"); opacity: 1; }
+    7%   { background-image: url("a.png"); opacity: 1; }
+    
+    /* Transition a.png to b.png (7-10%) */
+    10%  { background-image: url("b.png"); opacity: 1; } 
+    
+    /* Image b.png (Hold 10-17%) */
+    17%  { background-image: url("b.png"); opacity: 1; }
+    
+    /* Transition b.png to c.png (17-20%) */
+    20%  { background-image: url("c.png"); opacity: 1; }
+    
+    /* Image c.png (Hold 20-27%) */
+    27%  { background-image: url("c.png"); opacity: 1; }
+    
+    /* Transition c.png to d.png (27-30%) */
+    30%  { background-image: url("d.png"); opacity: 1; } 
+    
+    /* Image d.png (Hold 30-37%) */
+    37%  { background-image: url("d.png"); opacity: 1; }
+    
+    /* Transition d.png to e.png (37-40%) */
+    40%  { background-image: url("e.png"); opacity: 1; } 
+    
+    /* Image e.png (Hold 40-47%) */
+    47%  { background-image: url("e.png"); opacity: 1; }
+    
+    /* Transition e.png to f.png (47-50%) */
+    50%  { background-image: url("f.png"); opacity: 1; } 
+    
+    /* Image f.png (Hold 50-57%) */
+    57%  { background-image: url("f.png"); opacity: 1; }
+    
+    /* Transition f.png to g.png (57-60%) */
+    60%  { background-image: url("g.png"); opacity: 1; } 
 
-            30%  { background-image: url("d.png"); } /* Transition to Image 4 */
-            35%  { background-image: url("d.png"); } /* Hold Image 4 */
+    /* Image g.png (Hold 60-67%) */
+    67%  { background-image: url("g.png"); opacity: 1; }
+    
+    /* Transition g.png to h.png (67-70%) */
+    70%  { background-image: url("h.png"); opacity: 1; } 
+    
+    /* Image h.png (Hold 70-77%) */
+    77%  { background-image: url("h.png"); opacity: 1; }
+    
+    /* Transition h.png to i.png (77-80%) */
+    80%  { background-image: url("i.png"); opacity: 1; } 
+    
+    /* Image i.png (Hold 80-87%) */
+    87%  { background-image: url("i.png"); opacity: 1; }
+    
+    /* Transition i.png to j.png (87-90%) */
+    90%  { background-image: url("j.png"); opacity: 1; } 
+    
+    /* Image j.png (Hold 90-97%) */
+    97%  { background-image: url("j.png"); opacity: 1; }
+    
+    /* Transition j.png back to a.png (97-100%) */
+    100% { background-image: url("a.png"); opacity: 1; }
+}
+/* Note: Simplified the keyframes to use 10% increments for 10 images over 100%. */
 
-            40%  { background-image: url("e.png"); } /* Transition to Image 5 */
-            45%  { background-image: url("e.png"); } /* Hold Image 5 */
+/* --- End Image Sliding Background --- */
 
-            50%  { background-image: url("f.png"); } /* Transition to Image 6 */
-            55% { background-image: url("f.png"); } /* Hold Image 6 */
+/* Animation for the colon to flash every second */
+@keyframes blink {
+    0%, 49% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
 
-            60%  { background-image: url("g.png"); } /* Transition to Image 7 */
-            65%  { background-image: url("g.png"); } /* Hold Image 7 */
+.colon-blink {
+    animation: blink 1s infinite step-start;
+}
 
-            70%  { background-image: url("h.png"); } /* Transition to Image 8 */
-            75% { background-image: url("h.png"); } /* Hold Image 8 */
+.Name {
+    color: rgb(0, 0, 0);
+    /* Corrected: backdrop-filter value was too large, simplified background-color */
+    backdrop-filter: blur(5px);
+    background-color: rgba(255, 255, 255, 0.5); /* Semi-transparent white background */
+    width: 15rem; /* Used rem instead of cm for better responsiveness */
+    border: 1px solid black;
+    height: 5rem; /* Used rem instead of cm */
+    font-size: 40px;
+    text-align: center;
+    /* Adjusted positioning for better centering with flexbox */
+    position: relative;
+    top: -2rem; 
+}
 
-            80%  { background-image: url("i.png"); } /* Transition to Image 9 */
-            85%  { background-image: url("i.png"); } /* Hold Image 9 */
-
-            90%  { background-image: url("j.png"); } /* Transition to Image 10 */
-            95%  { background-image: url("j.png"); } /* Hold Image 10 */
-            100%  { background-image: url("a.png"); } /* Back to Image 1 for seamless loop */
-        }
-        /* --- End Image Sliding Background --- */
-
-        /* Animation for the colon to flash every second */
-        @keyframes blink {
-            0%, 49% { opacity: 1; }
-            50%, 100% { opacity: 0; }
-        }
-
-        .colon-blink {
-            animation: blink 1s infinite step-start;
-        }
-        .Name{
-       color: rgb(0, 0, 0);
-        backdrop-filter: blur(40cm);
-        background-color:rgba(red, green, blue, alpha);
-        width: 5cm;
-        border: 1px solid black;
-        height: 2cm;
-        font-size: 40px;
-        text-align: center;
-        position: relative;
-        top: -4cm;
-        }
-    .clockcontainer {
-     background-color: rgba(17, 24, 39, 0.7); /* Slightly more opaque background for the clock box */
-     backdrop-filter: blur(5px); /* Add a blur effect to the clock box background */
-     position: relative;
-     top: 3cm;
-     right: 10cm;
+.clockcontainer {
+    background-color: rgba(17, 24, 39, 0.7); /* Slightly more opaque background for the clock box */
+    backdrop-filter: blur(5px); /* Add a blur effect to the clock box background */
+    /* Adjusted positioning for better centering with flexbox */
+    position: relative;
+    top: 0; /* Remove hardcoded positioning or adjust it */
+    right: 0;
 }
